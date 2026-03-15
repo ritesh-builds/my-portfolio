@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap");
+
+:root {
+  color-scheme: dark;
+  --bg: #07131b;
+  --bg-soft: #0e1d27;
+  --surface: rgba(18, 32, 43, 0.85);
+  --surface-strong: rgba(23, 40, 54, 0.95);
+  --border: rgba(156, 204, 194, 0.18);
+  --text: #f3f7f5;
+  --muted: #a7b7b4;
+  --accent: #7ce0c3;
+  --accent-strong: #35c59b;
+  --accent-warm: #f4c97d;
+  --danger: #ff8b8b;
+  --success: #80f0b5;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-sm: 14px;
+  --container: min(1160px, calc(100vw - 32px));
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Manrope", sans-serif;
+}
