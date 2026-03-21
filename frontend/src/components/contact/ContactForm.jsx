@@ -65,7 +65,7 @@ function ContactForm() {
         <input
           name="email"
           type="email"
-          placeholder="you@example.com"
+          placeholder="riteshpeepal@gmail.com"
           value={formData.email}
           onChange={handleChange}
           required
