@@ -76,7 +76,9 @@ function AboutPage() {
         </article>
         <article className="content-card">
           <h3>Contact</h3>
-          <p className="section-copy">{profile.email}</p>
+          <p className="section-copy">
+            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          </p>
           <p className="section-copy">{profile.location}</p>
         </article>
       </div>

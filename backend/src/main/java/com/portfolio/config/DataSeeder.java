@@ -35,6 +35,9 @@ public class DataSeeder implements CommandLineRunner {
     @Value("${app.admin.password:Admin@123}")
     private String adminPassword;
 
+    @Value("${app.seed.overwrite:false}")
+    private boolean overwriteSeedData;
+
     @Override
     @Transactional
     public void run(String... args) {
@@ -56,83 +59,103 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     private void seedProfile() {
-        if (profileRepository.count() > 0) {
+        if (!overwriteSeedData && profileRepository.count() > 0) {
             return;
         }
 
-        profileRepository.save(Profile.builder()
-                .fullName("Ritesh Kumar")
-                .headline("Java Full-Stack Dev")
-                .tagline("Always be stronger than your excuses...")
-                .intro("I am Ritesh Kumar, a BTech CSE student at UIET MDU Rohtak who is building a strong foundation in Java full-stack development with React, Spring Boot, and MySQL.")
-                .about("I am currently studying at UIET MDU and focusing on practical full-stack development. I enjoy turning what I learn into real projects, improving my problem-solving skills, and building clean applications that connect frontend experiences with backend systems.")
-                .interests("Music, thinking")
-                .learningFocus("Java Spring Boot, React, MySQL, and full-stack project architecture.")
-                .careerGoal("To grow into a strong full-stack developer and build production-ready web applications.")
-                .location("Karnal")
-                .email("riteshpeepal@gmail.com")
-                .githubUrl("https://github.com/ritesh-builds")
-                .linkedinUrl("https://www.linkedin.com/in/ritesh-kumar-470307316/")
-                .instagramUrl("https://www.instagram.com/its.ritesh.hr/")
-                .twitterUrl("https://x.com/Code_By_Ritesh")
-                .resumeUrl(null)
-                .build());
+        Profile profile = overwriteSeedData
+                ? profileRepository.findFirstByOrderByIdAsc().orElse(Profile.builder().build())
+                : Profile.builder().build();
+
+        profile.setFullName("Ritesh Kumar");
+        profile.setHeadline("Java Full-Stack Dev");
+        profile.setTagline("Always be stronger than your excuses...");
+        profile.setIntro("I am Ritesh Kumar, a BTech CSE student at UIET MDU Rohtak who is building a strong foundation in Java full-stack development with React, Spring Boot, and MySQL.");
+        profile.setAbout("I am currently studying at UIET MDU and focusing on practical full-stack development. I enjoy turning what I learn into real projects, improving my problem-solving skills, and building clean applications that connect frontend experiences with backend systems.");
+        profile.setInterests("Music, thinking");
+        profile.setLearningFocus("Backend engineering, Java Spring Boot, and full-stack project architecture.");
+        profile.setCareerGoal("To grow into a strong full-stack developer and build production-ready web applications.");
+        profile.setLocation("Karnal, Haryana, India");
+        profile.setEmail("riteshpeepal@gmail.com");
+        profile.setGithubUrl("https://github.com/ritesh-builds");
+        profile.setLinkedinUrl("https://www.linkedin.com/in/ritesh-kumar-470307316/");
+        profile.setInstagramUrl("https://www.instagram.com/its.ritesh.hr/");
+        profile.setTwitterUrl("https://x.com/Code_By_Ritesh");
+        profile.setResumeUrl("/resume.png");
+
+        profileRepository.save(profile);
     }
 
     private void seedSkills() {
-        if (skillRepository.count() > 0) {
+        if (!overwriteSeedData && skillRepository.count() > 0) {
             return;
         }
 
+        if (overwriteSeedData) {
+            skillRepository.deleteAll();
+        }
+
         skillRepository.saveAll(List.of(
-                skill("Languages", "Python", 1),
-                skill("Languages", "Java", 2),
+                skill("Languages", "Java", 1),
+                skill("Languages", "Python", 2),
                 skill("Languages", "JavaScript", 3),
-                skill("Languages", "C", 4),
-                skill("Languages", "C++", 5),
-                skill("Frontend", "React", 1),
-                skill("Frontend", "Vite", 2),
-                skill("Frontend", "HTML", 3),
-                skill("Frontend", "CSS", 4),
+                skill("Languages", "SQL", 4),
+
                 skill("Backend", "Spring Boot", 1),
-                skill("Backend", "Node.js", 2),
+                skill("Backend", "Spring Security", 2),
                 skill("Backend", "REST APIs", 3),
-                skill("Database", "MySQL", 1),
-                skill("Database", "MongoDB", 2),
-                skill("Tools", "Git", 1)
+                skill("Backend", "JWT", 4),
+                skill("Backend", "OAuth2", 5),
+
+                skill("Databases/Tools", "MongoDB", 1),
+                skill("Databases/Tools", "Redis", 2),
+                skill("Databases/Tools", "Git", 3),
+                skill("Databases/Tools", "GitHub", 4),
+                skill("Databases/Tools", "Postman", 5),
+                skill("Databases/Tools", "SonarQube", 6),
+
+                skill("Core CS", "Data Structures & Algorithms", 1),
+                skill("Core CS", "OOPs", 2),
+                skill("Core CS", "DBMS", 3),
+                skill("Core CS", "Operating Systems", 4),
+                skill("Core CS", "Computer Networks", 5)
         ));
     }
 
     private void seedProjects() {
-        if (projectRepository.count() > 0) {
+        if (!overwriteSeedData && projectRepository.count() > 0) {
             return;
+        }
+
+        if (overwriteSeedData) {
+            projectRepository.deleteAll();
         }
 
         projectRepository.saveAll(List.of(
                 project(
-                        "Full Stack Portfolio Website (Current Project)",
-                        "A full stack portfolio website built with React, Spring Boot, and MySQL. It includes an admin dashboard for managing projects and viewing contact messages, JWT authentication, and REST APIs.",
-                        "Coming Soon",
-                        "Coming Soon",
-                        List.of("React", "Spring Boot", "MySQL", "JWT", "Axios"),
+                        "Journal Application Backend",
+                        "Built a backend journal management system using Java and Spring Boot with 10+ REST APIs for authentication and CRUD. Implemented JWT auth, Spring Security, and Google OAuth2 login. Integrated MongoDB for persistence and Redis caching for faster responses, added scheduled email features, and used SonarQube + Postman for quality and testing.",
+                        null,
+                        null,
+                        List.of("Java", "Spring Boot", "Spring Security", "JWT", "OAuth2", "MongoDB", "Redis", "Scheduler"),
                         1,
                         true
                 ),
                 project(
-                        "Upcoming Backend API Project",
-                        "A backend project currently being developed using Spring Boot and MySQL that will demonstrate REST APIs, database integration, and clean layered architecture.",
+                        "Next Project (Coming Soon)",
+                        "Coming soon — currently building the next backend-focused project.",
                         "Coming Soon",
-                        "N/A",
-                        List.of("Java", "Spring Boot", "MySQL"),
+                        "Coming Soon",
+                        List.of("Java", "Spring Boot"),
                         2,
                         false
                 ),
                 project(
-                        "Upcoming Full Stack Application",
-                        "A full stack application planned for future development to demonstrate frontend and backend integration using React and Spring Boot.",
+                        "Next Full-Stack Build (Coming Soon)",
+                        "Coming soon — a full-stack application with React + Spring Boot.",
                         "Coming Soon",
                         "Coming Soon",
-                        List.of("React", "Spring Boot", "MySQL"),
+                        List.of("React", "Spring Boot"),
                         3,
                         false
                 )
