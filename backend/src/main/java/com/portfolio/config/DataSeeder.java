@@ -139,7 +139,11 @@ public class DataSeeder implements CommandLineRunner {
                         "Journal Application Backend",
                         "Built a backend journal management system using Java and Spring Boot with 10+ REST APIs for authentication and CRUD. Implemented JWT auth, Spring Security, and Google OAuth2 login. Integrated MongoDB for persistence and Redis caching for faster responses, added scheduled email features, and used SonarQube + Postman for quality and testing.",
                         "https://github.com/ritesh-builds/journalApp",
+<<<<<<< HEAD
                         "Coming Soon...",
+=======
+                        "Comming Soon...",
+>>>>>>> 81902bccc558ff8acb93275d1e7aeae7509f7b4e
                         List.of("Java", "Spring Boot", "Spring Security", "JWT", "OAuth2", "MongoDB", "Redis", "Scheduler"),
                         1,
                         true
