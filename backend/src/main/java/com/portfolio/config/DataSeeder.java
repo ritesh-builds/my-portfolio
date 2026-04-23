@@ -1,5 +1,13 @@
 package com.portfolio.config;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.portfolio.model.AdminUser;
@@ -10,13 +18,8 @@ import com.portfolio.repository.AdminUserRepository;
 import com.portfolio.repository.ProfileRepository;
 import com.portfolio.repository.ProjectRepository;
 import com.portfolio.repository.SkillRepository;
-import java.util.List;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -135,8 +138,8 @@ public class DataSeeder implements CommandLineRunner {
                 project(
                         "Journal Application Backend",
                         "Built a backend journal management system using Java and Spring Boot with 10+ REST APIs for authentication and CRUD. Implemented JWT auth, Spring Security, and Google OAuth2 login. Integrated MongoDB for persistence and Redis caching for faster responses, added scheduled email features, and used SonarQube + Postman for quality and testing.",
-                        null,
-                        null,
+                        "https://github.com/ritesh-builds/journalApp",
+                        "Coming Soon...",
                         List.of("Java", "Spring Boot", "Spring Security", "JWT", "OAuth2", "MongoDB", "Redis", "Scheduler"),
                         1,
                         true
@@ -144,9 +147,9 @@ public class DataSeeder implements CommandLineRunner {
                 project(
                         "Next Project (Coming Soon)",
                         "Coming soon — currently building the next backend-focused project.",
-                        "Coming Soon",
-                        "Coming Soon",
-                        List.of("Java", "Spring Boot"),
+                        "Coming Soon...",
+                        "Coming Soon...",
+                        List.of("Java", "SpringBoot"),
                         2,
                         false
                 ),
